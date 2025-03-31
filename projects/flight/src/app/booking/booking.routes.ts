@@ -1,4 +1,4 @@
-import { Routes } from "@angular/router";
+import { Router, Routes } from "@angular/router";
 import { provideEffects } from "@ngrx/effects";
 import { provideState } from "@ngrx/store";
 import { DepatureComponent } from "../boarding/feature-departure";
@@ -7,6 +7,8 @@ import { MyFlightsComponent } from "./feature-flight/my-flights/my-flights.compo
 import { TicketEffects } from "./logic-flight/+state/effects";
 import { ticketFeature } from "./logic-flight/+state/reducer";
 import { resolveFlight } from "./logic-flight/data-access/flight.resolver";
+import { inject } from "@angular/core";
+import { AUTH_STATE } from "../app.providers";
 
 
 export const BOOKING_ROUTES: Routes = [
@@ -34,6 +36,9 @@ export const BOOKING_ROUTES: Routes = [
           {
             path: 'search',
             component: FlightSearchComponent,
+            canMatch: [
+              () => inject(AUTH_STATE) || inject(Router).createUrlTree(['/home'])
+            ]
           },
           {
             path: 'edit/:id',
