@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderbarComponent, SidebarComponent } from './shared/ui-core';
+import { FlightService } from './booking/logic-flight/data-access/flight.service';
 
 
 @Component({
@@ -30,4 +31,7 @@ import { HeaderbarComponent, SidebarComponent } from './shared/ui-core';
   `
 })
 export class AppComponent {
+  private flightService = inject(FlightService);
+  
+  count$ = this.flightService.flightsCount$;
 }
