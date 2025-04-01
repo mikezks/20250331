@@ -13,11 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(APP_ROUTES,
       withComponentInputBinding()
     ),
-    provideHttpClient(
-      withInterceptors([
-        authInterceptor
-      ])
-    ),
+    provideHttpClient(),
     provideStore(),
     provideEffects(),
     provideRouterFeature(),

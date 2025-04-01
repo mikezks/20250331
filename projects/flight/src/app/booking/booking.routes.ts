@@ -20,14 +20,6 @@ export const BOOKING_ROUTES: Routes = [
     providers: [
       provideState(ticketFeature),
       provideEffects([TicketEffects]),
-      provideHttpClient(
-        withInterceptors([
-          (req, next) => next(req).pipe(
-            tap(resp => console.log('Inline Booking Interceptor', resp))
-          )
-        ]),
-        withRequestsMadeViaParent()
-      ),
     ],
     children: [
       {
