@@ -51,8 +51,8 @@ export class FlightCardComponent {
   blink = injectCdBlink();
 
   readonly item = input.required<Flight>();
+  readonly itemChange = output<Flight>();
   readonly selected = model(false);
-  readonly delayTrigger = output<Flight>();
 
   constructor() {
     // effect(() => console.log(this.item()));
@@ -63,6 +63,6 @@ export class FlightCardComponent {
   }
 
   delay(): void {
-    this.delayTrigger.emit(this.item());
+    this.itemChange.emit(this.item());
   }
 }
