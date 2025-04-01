@@ -1,5 +1,5 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
@@ -7,6 +7,9 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { APP_ROUTES } from './app.routes';
 import { authInterceptor } from './shared/logic-communication/auth/auth.interceptor';
 import { provideRouterFeature } from './shared/logic-router-state';
+import { FlightService } from './booking/api-boarding';
+import { delay, tap } from 'rxjs';
+import { provideInitialFlight } from './app.providers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(),
     provideEffects(),
     provideRouterFeature(),
-    provideStoreDevtools()
+    provideStoreDevtools(),
+    provideInitialFlight()
   ]
 };

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Flight, FlightFilter, injectTicketsFacade } from '../../logic-flight';
 import { FlightCardComponent, FlightFilterComponent } from '../../ui-flight';
+import { provideInitialFlight } from '../../../app.providers';
 
 
 @Component({
@@ -13,7 +14,10 @@ import { FlightCardComponent, FlightFilterComponent } from '../../ui-flight';
     FlightCardComponent,
     FlightFilterComponent
   ],
-  templateUrl: './flight-search.component.html'
+  templateUrl: './flight-search.component.html',
+  providers: [
+    // provideInitialFlight()
+  ]  
 })
 export class FlightSearchComponent {
   private ticketsFacade = injectTicketsFacade();
