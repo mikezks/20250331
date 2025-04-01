@@ -14,8 +14,12 @@
         <button *ngIf="flights.length" (click)="reset()"
           class="btn btn-default flight-filter-button"
         >Reset</button>
+        <button *ngIf="flights.length" (click)="logCounter()"
+          class="btn btn-default flight-filter-button"
+        >Log Counter</button>
       </app-flight-filter>
       <p>{{ route() }}</p>
+      <p>Counter: {{ counter() }}</p>
     </div>
   </div>
 
