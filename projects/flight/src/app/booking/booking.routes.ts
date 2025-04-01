@@ -11,6 +11,8 @@ import { inject } from "@angular/core";
 import { AUTH_STATE } from "../app.providers";
 import { provideHttpClient, withInterceptors, withRequestsMadeViaParent } from "@angular/common/http";
 import { tap } from "rxjs";
+import { provideNavigationConfig } from "../shared/logic-navigation";
+import { BOOKING_NAVIGATION } from "./booking.navigation";
 
 
 export const BOOKING_ROUTES: Routes = [
@@ -20,6 +22,7 @@ export const BOOKING_ROUTES: Routes = [
     providers: [
       provideState(ticketFeature),
       provideEffects([TicketEffects]),
+      provideNavigationConfig(BOOKING_NAVIGATION)
     ],
     children: [
       {
