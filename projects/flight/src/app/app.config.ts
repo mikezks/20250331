@@ -21,6 +21,5 @@ export const appConfig: ApplicationConfig = {
     provideEffects(),
     provideRouterFeature(),
     provideStoreDevtools(),
-    provideInitialFlight()
   ]
 };
