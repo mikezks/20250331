@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, effect, signal, untracked } from '@angular/core';
+import { Component, computed, effect, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Flight, FlightFilter, injectTicketsFacade } from '../../logic-flight';
+import { Flight, injectTicketsFacade } from '../../logic-flight';
 import { FlightCardComponent, FlightFilterComponent } from '../../ui-flight';
-import { SIGNAL } from '@angular/core/primitives/signals';
 
 
 @Component({
@@ -32,71 +31,11 @@ export class FlightSearchComponent {
     5: true
   };
   protected flights$ = this.ticketsFacade.flights$;
-  protected counter = signal(0);
 
   constructor() {
-    effect(() => console.log(this.counter()));
-
     effect(() => this.search());
-
-    effect(() => {
-      this.route();
-      untracked(() => this.logRoute());
-    });
-
-    console.log(this.filter().from);
-    this.filter.update(curr => ({ ...curr, from: 'Barcelona'}));
-    console.log(this.filter().from);
-    this.filter.update(curr => ({ ...curr, from: 'Madrid'}));
-    console.log(this.filter().from);
-    this.filter.update(curr => ({ ...curr, from: 'Rome'}));
-    console.log(this.filter().from);
-    this.filter.update(curr => ({ ...curr, from: 'Athens'}));
-    console.log(this.filter().from);
-    this.filter.update(curr => ({ ...curr, from: 'Oslo'}));
-    console.log(this.filter().from);
-    this.filter.update(curr => ({ ...curr, from: 'Berlin'}));
-    console.log(this.filter().from);
-
-    // Glitch-free behavior:
-    const counter = signal(0);
-    const isEven = computed(() => counter() % 2 === 0);
-
-    // RxJS - combineLatest
-    /**
-     * counter: 0, isEven: true
-     * counter: 1, isEven: true
-     * counter: 1, isEven: false
-     * counter: 2, isEven: false
-     * counter: 2, isEven: true
-     */
-
-    // Signals
-    /**
-     * counter: 0, isEven: true
-     * (counter: 1, isEven: false)
-     * counter: 2, isEven: true
-     */
   }
 
-  protected logCounter(): void {
-    this.counter.update(curr => curr + 1);
-    this.counter.update(curr => curr + 1);
-    this.counter.update(curr => curr + 1);
-    this.counter.update(curr => curr + 1);
-    this.counter.update(curr => curr + 1);
-    queueMicrotask(() => this.counter.update(curr => curr + 1));
-    queueMicrotask(() => this.counter.update(curr => curr + 1));
-    queueMicrotask(() => this.counter.update(curr => curr + 1));
-    setTimeout(() => this.counter.update(curr => curr + 1));
-    setTimeout(() => this.counter.update(curr => curr + 1));
-    setTimeout(() => this.counter.update(curr => curr + 1));
-  }
-
-  private logRoute(): void {
-    console.log(this.route());
-  }
-  
   protected search(): void {
     if (!this.filter().from || !this.filter().to) {
       return;
