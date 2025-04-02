@@ -31,9 +31,12 @@ export class FlightSearchComponent {
     5: true
   };
   protected flights = this.ticketsFacade.flights;
+  name = 'Mary';
 
   constructor() {
     effect(() => this.search());
+
+    setTimeout(() => this.name = 'Peter', 3_000);
   }
 
   protected search(): void {
