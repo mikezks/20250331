@@ -20,13 +20,15 @@
 </div>
 
 <div class="row">
-  <div *ngFor="let flight of flights" class="col-xs-12 col-sm-6 col-md-4">
-    <app-flight-card
-      [item]="flight"
-      (itemChange)="delay($event)"
-      [(selected)]="basket[flight.id]"
-    />
-  </div>
+  @for (flight of flights; track flight.id) {
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <app-flight-card
+        [item]="flight"
+        (itemChange)="delay($event)"
+        [(selected)]="basket[flight.id]"
+      />
+    </div>
+  }
 </div>
 
 <div class="card">

@@ -1,5 +1,5 @@
 import { DatePipe, NgStyle } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, effect, input, model, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, Output, effect, inject, input, model, output, untracked } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { injectCdBlink } from '../../../shared/util-cd-visualizer';
 import { Flight } from '../../logic-flight';
@@ -49,6 +49,7 @@ import { Flight } from '../../logic-flight';
 })
 export class FlightCardComponent {
   blink = injectCdBlink();
+  private destroyRef = inject(DestroyRef);
 
   readonly item = input.required<Flight>();
   readonly itemChange = output<Flight>();
@@ -56,6 +57,12 @@ export class FlightCardComponent {
 
   constructor() {
     // effect(() => console.log(this.item()));
+    effect(() => untracked(
+      () => console.log('Flight Card INIT', this.item().id)
+    ));
+    this.destroyRef.onDestroy(
+      () => console.log('Flight Card DESTROY', this.item().id)
+    );
   }
 
   toggleSelection(): void {
