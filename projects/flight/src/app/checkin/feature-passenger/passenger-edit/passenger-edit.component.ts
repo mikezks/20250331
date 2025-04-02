@@ -25,9 +25,12 @@ export class PassengerEditComponent {
   private passengerService = inject(PassengerService);
 
   id = input(0, { transform: numberAttribute });
-  passengerResource = httpResource(
-    () => `https://demo.angulararchitects.io/api/passenger?id=${ this.id() }`
-  );
+  passengerResource = httpResource(() => ({
+    url: 'https://demo.angulararchitects.io/api/passenger',
+    params: {
+      id: this.id()
+    }
+  }));
 
   protected editForm = inject(NonNullableFormBuilder).group({
     id: [0],
