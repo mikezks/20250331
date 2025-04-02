@@ -1,17 +1,13 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, inject, provideAppInitializer, provideExperimentalZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ApplicationConfig } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { APP_ROUTES } from './app.routes';
-import { authInterceptor } from './shared/logic-communication/auth/auth.interceptor';
-import { provideRouterFeature } from './shared/logic-router-state';
-import { FlightService } from './booking/api-boarding';
-import { delay, tap } from 'rxjs';
-import { provideInitialFlight } from './app.providers';
-import { provideNavigationService } from './shared/logic-navigation';
 import { APP_NAVIGATION } from './app.navigation';
+import { APP_ROUTES } from './app.routes';
+import { provideNavigationService } from './shared/logic-navigation';
+import { provideRouterFeature } from './shared/logic-router-state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,6 +20,5 @@ export const appConfig: ApplicationConfig = {
     provideRouterFeature(),
     provideStoreDevtools(),
     provideNavigationService(APP_NAVIGATION),
-    provideExperimentalZonelessChangeDetection()
   ]
 };
